@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <style>
+        body {
+            margin: 20px;
+            padding: 20px;
+        }
+        .slider-container {
+            margin-bottom: 20px;
+        }
+        .slider-label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>Product Feedback</h2>
+    <form>
+        <label class="slider-label" for="quality">Quality (0-10):</label>
+        <input type="range" id="quality" name="quality" min="0" max="10" value="0" oninput="calculateTotal()">
+        <output id="qualityValue">0</output>
+
+        <label class="slider-label" for="design">Design (0-10):</label>
+        <input type="range" id="design" name="design" min="0" max="10" value="0" oninput="calculateTotal()">
+        <output id="designValue">0</output>
+
+        <label class="slider-label" for="usability">Usability (0-10):</label>
+        <input type="range" id="usability" name="usability" min="0" max="10" value="0" oninput="calculateTotal()">
+        <output id="usabilityValue">0</output>
+
+        <label class="slider-label" for="total">Total Score:</label>
+        <output id="totalValue" style="color: red;">0</output>
+    </form>
+
+    <script>
+        function calculateTotal() {
+            const quality = document.getElementById('quality').value;
+            const design = document.getElementById('design').value;
+            const usability = document.getElementById('usability').value;
+
+            document.getElementById('qualityValue').textContent = quality;
+            document.getElementById('designValue').textContent = design;
+            document.getElementById('usabilityValue').textContent = usability;
+
+            const total = parseInt(quality) + parseInt(design) + parseInt(usability);
+            document.getElementById('totalValue').textContent = total;
+        }
+    </script>
+</body>
+</html>

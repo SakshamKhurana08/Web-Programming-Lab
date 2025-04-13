@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+</head>
+<body>
+    <fieldset style="width: 500px;">
+        <legend>Login</legend>
+        <label for="user">Username*</label><br>
+        <input type="text" id="user" name="user" required/><br>
+        <label for="password">Password*</label><br>
+        <input type="password" id="password" name="password" required/>
+    </fieldset>
+    <fieldset style="width: 500px;">
+        <legend>Gender*</legend>
+        <input type="radio" id="male" name="male" required/>
+        <label for="male">Male</label>
+        <input type="radio" id="female" name="female"/>
+        <label for="female">Female</label>
+    </fieldset>
+    <fieldset style="width: 500px;">
+        <legend>Programming Skill</legend>
+        <input type="checkbox" id="java" name="java"/>
+        <label for="java">Java</label>
+        <input type="checkbox" id="cpp" name="cpp"/>
+        <label for="cpp">C++</label>
+        <input type="checkbox" id="csharp" name="csharp"/>
+        <label for="csharp">C#</label>
+    </fieldset>
+    <fieldset style="width: 500px;">
+        <legend>Fruit</legend>
+        <label for="fruit">Choose a fruit:</label>
+        <select name="fruit" id="fruit">
+            <optgroup label="Pome"></optgroup>
+            <option value="Apples">Apples</option>
+            <option value="Pears">Pears</option>
+
+            <optgroup label="Citrus"></optgroup>
+            <option value="Oranges">Oranges</option>
+            <option value="Grapefruits">Grapefruits</option>
+            <option value="Mandarins">Mandarins</option>
+            <option value="Limes">Limes</option>
+
+            <optgroup label="Stone"></optgroup>
+            <option value="Nectarines">Nectarines</option>
+            <option value="Apricots">Apricots</option>
+            <option value="Peaches">Peaches</option>
+            <option value="Plums">Plums</option>
+
+            <optgroup label="Exotic"></optgroup>
+            <option value="Bananas">Bananas</option>
+            <option value="Mangoes">Mangoes</option>
+
+            <optgroup label="Berries"></optgroup>
+            <option value="Strawberries">Strawberries</option>
+            <option value="Raspberries">Raspberries</option>
+            <option value="Blueberries">Blueberries</option>
+            <option value="Kiwifruit">Kiwifruit</option>
+            <option value="Passionfruit">Passionfruit</option>
+
+            <optgroup label="Melons"></optgroup>
+            <option value="Watermelons">Watermelons</option>
+            <option value="Rock-melons">Rock-melons</option>
+            <option value="Honeydew melons">Honeydew melons</option>
+        </select>
+    </fieldset>
+    <br>
+    <textarea id="comment" name="comment" rows="8" cols="69">Enter your comment here</textarea><br>
+    <input type="button" value="Send"/>
+    <input type="button" value="Reset"/>
+</body>
+</html>
