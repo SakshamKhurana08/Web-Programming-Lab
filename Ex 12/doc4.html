@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .chart-container {
+            width: 45%;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chart-container">
+        <div id="barChart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="lineChart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="pieChart"></div>
+    </div>
+    <div class="chart-container">
+        <div id="donutChart"></div>
+    </div>
+
+    <script>
+        const categories = ["A", "B", "C", "D", "E"];
+        const values = [20, 34, 50, 15, 45];
+
+        Plotly.newPlot("barChart", [{
+            x: categories,
+            y: values,
+            type: 'bar',
+            marker: { color: ['red', 'blue', 'green', 'purple', 'orange'] }
+        }], {
+            title: "Bar Chart",
+            xaxis: { title: "Categories" },
+            yaxis: { title: "Values" },
+            responsive: true
+        });
+
+        Plotly.newPlot("lineChart", [{
+            x: categories,
+            y: values,
+            type: 'scatter',
+            mode: 'lines+markers',
+            marker: { color: 'blue', size: 8 },
+            line: { color: 'blue', width: 2 }
+        }], {
+            title: "Line Chart",
+            xaxis: { title: "Categories" },
+            yaxis: { title: "Values" },
+            responsive: true
+        });
+
+        Plotly.newPlot("pieChart", [{
+            labels: categories,
+            values: values,
+            type: 'pie',
+            marker: { colors: ['red', 'blue', 'green', 'purple', 'orange'] }
+        }], {
+            title: "Pie Chart",
+            responsive: true
+        });
+
+        Plotly.newPlot("donutChart", [{
+            labels: categories,
+            values: values,
+            type: 'pie',
+            hole: 0.4,
+            marker: { colors: ['red', 'blue', 'green', 'purple', 'orange'] }
+        }], {
+            title: "Donut Chart",
+            responsive: true
+        });
+    </script>
+
+</body>
+</html>
