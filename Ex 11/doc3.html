@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+        }
+        form {
+            display: grid;
+            grid-template-columns: 250px 1fr 250px 220px;
+            gap: 10px;
+            width: 1000px;
+            border: 2px solid #000;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .box{
+            border: 2px solid #000;
+            padding: 3px;
+            border-radius: 10px;
+        }
+        .label1 {
+            text-align: left;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+        }
+        .dd{
+            font-size: 12px;
+            color: red;
+        }
+        button {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    
+    <form id="studentForm">
+        <h3 style="grid-column: span 2;">Test JavaScript Form Validation</h3>
+        <div></div>
+        <h4 class="box">Current Time: <span id="time"></span></h4>
+
+        <label class="label1" for="name">Name <span class="error">*</span></label>
+        <input type="text" id="name" name="name" required>
+        <div class="dd" id="d1"></div>
+        <div></div>
+
+        <label class="label1" for="address">Address <span class="error">*</span></label>
+        <textarea type="text" id="address" name="address" required></textarea>
+        <div></div>
+        <div></div>
+        
+        <label class="label1" for="zip">Zip Code <span class="error">*</span></label>
+        <input type="text" id="zip" name="zip" required>
+        <div class="dd" id="d2"></div>
+        <div></div>
+        
+        <label class="label1" for="country">Country <span class="error">*</span></label>
+        <select id="country" name="country" required>
+            <option value="">Select Country</option>
+            <option value="india">India</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+        </select>
+        <div></div>
+        <div></div>
+
+        <label class="label1" for="gender">Gender <span class="error">*</span></label>
+        <p style="margin: 0%;">
+            <input type="radio" id="male" name="gender" value="Male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="Female">
+            <label for="female">Female</label>
+        </p>
+        <div></div>
+        <div></div>
+
+        <label class="label1" for="preferences">Preferences <span class="error">*</span></label>
+        <p style="margin: 0%;">
+            <input type="checkbox" id="red" name="preferences" value="Red">
+            <label for="red">Red</label>
+            <input type="checkbox" id="green" name="preferences" value="Green">
+            <label for="green">Green</label>
+            <input type="checkbox" id="blue" name="preferences" value="Blue">
+            <label for="blue">Blue</label>
+        </p>
+        <div></div>
+        <div></div>
+
+        <label class="label1" for="phone">Phone Number <span class="error">*</span></label>
+        <input type="text" id="phone" name="phone" required>
+        <div class="dd" id="d3"></div>
+        <div></div>
+
+        <label class="label1" for="email">Email <span class="error">*</span></label>
+        <input type="email" id="email" name="email" required>
+        <div class="dd" id="d4"></div>
+        <div></div>
+
+        <label class="label1" for="password">Password <span class="error">*</span></label>
+        <input type="password" id="password" name="password" required>
+        <div class="dd" id="d5"></div>
+        <div></div>
+
+        <label class="label1" for="password_verify">Verify Password <span class="error">*</span></label>
+        <input type="password" id="password_verify" name="password_verify" required>
+        <div class="dd" id="d6"></div>
+        <div></div>
+
+        <label class="label1" for="pan">PAN Card Number <span class="error">*</span></label>
+        <input type="text" id="pan" name="pan" required>
+        <div class="dd" id="d7"></div>
+        <div></div>
+
+        <div></div>
+        <div>
+            <button type="submit">Submit</button>
+            <button type="submit">Clear</button>
+        </div>
+
+        <div></div>
+        <div></div>
+        <div id="d8"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div id="d9"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div id="d10"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div id="d11"></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </form>
+
+    <script>
+        function displayTime() {
+            let now = new Date();
+            document.getElementById('time').textContent = now.toLocaleTimeString();
+        }
+        setInterval(displayTime, 1000);
+
+        document.getElementById('studentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById('name').value;
+            if (name.length > 15) {
+                document.getElementById('d1').innerHTML = "Name should not exceed 15 characters";
+                return;
+            }
+            else{
+                document.getElementById('d1').innerHTML = "";
+            }
+
+            let zip = document.getElementById('zip').value;
+            if (isNaN(zip) || zip.length !== 6) {
+                document.getElementById('d2').innerHTML = "Zip Code should be numeric and 6 digits long";
+                return;
+            }
+            else{
+                document.getElementById('d2').innerHTML = "";
+            }
+
+            let phone = document.getElementById('phone').value.trim();
+            console.log(phone);
+            if (!/^\d{10}$/.test(phone)) {
+                document.getElementById('d3').innerHTML = "Phone number should be numeric and 10 digits long";
+                return;
+            }
+            else{
+                document.getElementById('d3').innerHTML = "";
+            }
+
+            let email = document.getElementById('email').value;
+            let emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('d4').innerHTML = "Please enter a valid email address";
+                return;
+            }
+            else{
+                document.getElementById('d4').innerHTML = "";
+            }
+
+            let password = document.getElementById('password').value;
+            let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,15}$/;
+            if (!passwordPattern.test(password)) {
+                document.getElementById('d5').innerHTML = "Password must be 8-15 characters, contain a number, a letter, and a special character";
+                return;
+            }
+            else{
+                document.getElementById('d5').innerHTML = "";
+            }
+
+            let password_v = document.getElementById('password_verify').value;
+            if (password != password_v) {
+                document.getElementById('d6').innerHTML = "Passwords do not match";
+                return;
+            }
+            else{
+                document.getElementById('d6').innerHTML = "";
+            }
+
+            let pan = document.getElementById('pan').value;
+            let panPattern = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/;
+            if (!panPattern.test(pan)) {
+                document.getElementById('d7').innerHTML = "Please enter a valid PAN card number (e.g., ABCDE1234F)";
+                return;
+            }
+            else{
+                document.getElementById('d7').innerHTML = "";
+            }
+
+            let gender = document.getElementsByName('gender')[0].value;
+            let country = document.getElementsByName('country')[0].value;
+            let preferences = [];
+            document.querySelectorAll('input[name="preferences"]:checked').forEach(function(checkbox) {
+                preferences.push(checkbox.value);
+            });
+
+            document.getElementById("d8").innerHTML = "Form content:";
+            document.getElementById("d9").innerHTML = "Gender: " + gender;
+            document.getElementById("d10").innerHTML = "Country: " + country;
+            document.getElementById("d11").innerHTML = "Preferences: " + preferences;
+            
+        });
+
+        document.getElementById('studentForm').addEventListener('submit', function(event) {
+            let mandatoryFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+            for (let field of mandatoryFields) {
+                if (!field.value) {
+                    field.focus();
+                    alert('Please fill all mandatory fields!');
+                    event.preventDefault();
+                    break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

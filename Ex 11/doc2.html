@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+</head>
+<body>
+    <h2>Simple Stopwatch</h2>
+    <div id="stopwatch">
+        <p id="timeDisplay">00:00</p>
+        <button id="startBtn">Start</button>
+        <button id="stopBtn" disabled>Stop</button>
+        <button id="resetBtn">Reset</button>
+    </div>
+
+    <h2>Calculate Age on Mouseover</h2>
+    <input type="date" id="dob" placeholder="Enter Date of Birth" />
+    <p id="ageDisplay">Your age will appear here.</p>
+
+    <h2>Textarea with Character Counter</h2>
+    <textarea id="textArea" placeholder="Type here..."></textarea>
+    <p>Characters: <span id="charCount">0</span></p>
+
+    <script>
+        let timer;
+        let isRunning = false;
+        let seconds = 0;
+
+        function updateDisplay() {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            document.getElementById('timeDisplay').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+        }
+
+        document.getElementById('startBtn').addEventListener('click', function() {
+            if (!isRunning) {
+                isRunning = true;
+                timer = setInterval(function() {
+                    seconds++;
+                    updateDisplay();
+                }, 1000);
+                document.getElementById('startBtn').disabled = true;
+                document.getElementById('stopBtn').disabled = false;
+            }
+        });
+
+        document.getElementById('stopBtn').addEventListener('click', function() {
+            clearInterval(timer);
+            isRunning = false;
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+        });
+
+        document.getElementById('resetBtn').addEventListener('click', function() {
+            clearInterval(timer);
+            isRunning = false;
+            seconds = 0;
+            updateDisplay();
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('stopBtn').disabled = true;
+        });
+
+        document.getElementById('dob').addEventListener('mouseover', function() {
+            const dob = new Date(this.value);
+            if (dob) {
+                const today = new Date();
+                let age = today.getFullYear() - dob.getFullYear();
+                const m = today.getMonth() - dob.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+                    age--;
+                }
+                document.getElementById('ageDisplay').textContent = `Your age is ${age} years.`;
+            }
+        });
+
+        document.getElementById('textArea').addEventListener('input', function() {
+            const charCount = this.value.length;
+            document.getElementById('charCount').textContent = charCount;
+        });
+    </script>
+</body>
+</html>
