@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Temperature Analysis for New York City</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Temperature (°F)</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody id="temperatureTable"></tbody>
+    </table>
+
+    <div>
+        <h2>Temperature Categories Count:</h2>
+        <p id="hotCount"></p>
+        <p id="pleasantCount"></p>
+        <p id="coldCount"></p>
+    </div>
+
+    <script>
+        const temperatures = [55, 62, 68, 74, 59, 45, 41, 58, 60, 67, 65, 78, 82, 88, 91, 92, 90, 93, 87, 80, 78, 79, 72, 68, 61, 59, 55, 65];
+        let hotDays = 0;
+        let pleasantDays = 0;
+        let coldDays = 0;
+
+        function categorizeTemperature(temp) {
+            if (temp >= 85) {
+                hotDays++;
+                return 'HOT';
+            } else if (temp >= 60) {
+                pleasantDays++;
+                return 'PLEASANT';
+            } else {
+                coldDays++;
+                return 'COLD';
+            }
+        }
+
+        const tableBody = document.getElementById('temperatureTable');
+        temperatures.forEach((temp, index) => {
+            const row = document.createElement('tr');
+            const dayCell = document.createElement('td');
+            const tempCell = document.createElement('td');
+            const categoryCell = document.createElement('td');
+
+            dayCell.textContent = index + 1;
+            tempCell.textContent = temp;
+            categoryCell.textContent = categorizeTemperature(temp);
+
+            row.appendChild(dayCell);
+            row.appendChild(tempCell);
+            row.appendChild(categoryCell);
+            tableBody.appendChild(row);
+        });
+
+        document.getElementById('hotCount').textContent = `Number of HOT days: ${hotDays}`;
+        document.getElementById('pleasantCount').textContent = `Number of PLEASANT days: ${pleasantDays}`;
+        document.getElementById('coldCount').textContent = `Number of COLD days: ${coldDays}`;
+    </script>
+
+</body>
+</html>

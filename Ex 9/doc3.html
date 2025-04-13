@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>BMI Calculator</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+    <script>
+        function calculateBMI() {
+            var weight = parseFloat(document.getElementById("weight").value);
+            var feet = parseFloat(document.getElementById("feet").value);
+            var inches = parseFloat(document.getElementById("inches").value);
+            var gender = document.getElementById("gender").value;
+            
+            if (isNaN(weight) || isNaN(feet) || isNaN(inches)) {
+                alert("Please enter valid numerical values.");
+                return;
+            }
+            
+            var heightInInches = (feet * 12) + inches;
+            var heightInMeters = heightInInches * 0.0254;
+            var bmi = weight / (heightInMeters * heightInMeters);
+            var category = "";
+            
+            if (gender === "Male") {
+                if (bmi < 17.50) category = "Anorexia";
+                else if (bmi >= 17.501 && bmi <= 20.70) category = "Underweight";
+                else if (bmi >= 20.71 && bmi <= 26.40) category = "Ideal Range";
+                else if (bmi >= 26.41 && bmi <= 27.80) category = "Marginally Overweight";
+                else if (bmi >= 27.81 && bmi <= 31.10) category = "Overweight";
+                else category = "Very Overweight or Obese";
+            } else {
+                if (bmi < 17.50) category = "Anorexia";
+                else if (bmi >= 17.51 && bmi <= 19.10) category = "Underweight";
+                else if (bmi >= 19.11 && bmi <= 25.80) category = "Ideal Range";
+                else if (bmi >= 25.81 && bmi <= 27.30) category = "Marginally Overweight";
+                else if (bmi >= 27.31 && bmi <= 32.30) category = "Overweight";
+                else category = "Very Overweight or Obese";
+            }
+            
+            alert("Your BMI is " + bmi.toFixed(2) + "\nStatus: " + category);
+        }
+    </script>
+</head>
+<body>
+    <h2>BMI Calculator</h2>
+    <table>
+        <tr>
+            <th colspan="2">BMI Calculator</th>
+        </tr>
+        <tr>
+            <td><label for="gender">Gender: </label></td>
+            <td>
+                <select id="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Enter Your Weight (in pounds): </label></td>
+            <td><input type="text" id="weight"></td>
+        </tr>
+        <tr>
+            <td><label>Enter Your Height:</label></td>
+            <td>
+                <label>Feet: </label>
+                <input type="text" id="feet"><br>
+                <label>Inches: </label>
+                <input type="text" id="inches">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"><button onclick="calculateBMI()">Calculate</button></td>
+        </tr>
+    </table>
+</body>
+</html>

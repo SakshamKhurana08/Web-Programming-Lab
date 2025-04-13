@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>23BCE1462</title>
+        <style>
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 8px;
+            }
+            th {
+                background-color: #f2f2f2;
+            }
+            button {
+                padding: 10px;
+                margin: 10px;
+                font-size: 16px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Airline Reservation System</h1>
+
+        <div id="reservationResult"></div>
+        <div id="boardingPass"></div>
+        <button id="reserveBtn">Make a Reservation</button>
+
+        <script>
+            let seats = Array(10).fill(0);
+
+            function displaySeatingChart() {
+                let chart = '<h2>Seating Chart</h2><table><tr><th>Seat No.</th><th>Status</th></tr>';
+                for (let i = 0; i < seats.length; i++) {
+                    chart += `<tr><td style="background-color: ${i+1<=5 ? 'pink' : 'yellow'};">${i + 1}</td><td style="color:${seats[i] === 0 ? 'green' : 'red'}; background-color: ${i+1<=5 ? 'pink' : 'yellow'};">${seats[i] === 0 ? 'Available' : 'Occupied'}</td></tr>`;
+                }
+                chart += '</table>';
+                document.getElementById('reservationResult').innerHTML = chart;
+            }
+
+            function reserveSeat(classChoice, personName, seatNumber) {
+                let seatAssigned = -1;
+
+                if (classChoice === 1) {
+                    if (seatNumber >= 1 && seatNumber <= 5 && seats[seatNumber - 1] === 0) {
+                        seats[seatNumber - 1] = 1;
+                        seatAssigned = seatNumber;
+                    } else {
+                        alert("Seat is either out of range or already occupied in First Class.");
+                    }
+                }
+
+                if (classChoice === 2 && seatAssigned === -1) {
+                    if (seatNumber >= 6 && seatNumber <= 10 && seats[seatNumber - 1] === 0) {
+                        seats[seatNumber - 1] = 1;
+                        seatAssigned = seatNumber;
+                    } else {
+                        alert("Seat is either out of range or already occupied in Economy Class.");
+                    }
+                }
+
+                if (seatAssigned !== -1) {
+                    let boardingPass = `<h2>Boarding Pass</h2>`;
+                    boardingPass += `Name: ${personName}<br>Seat Number: ${seatAssigned}<br>Class: ${classChoice === 1 ? 'First Class' : 'Economy Class'}`;
+                    document.getElementById('boardingPass').innerHTML = boardingPass;
+                } else {
+                    alert("No valid seat selected. Please try again.");
+                }
+
+                displaySeatingChart();
+            }
+
+            function makeReservation() {
+                let personName = prompt("Enter your name: ");
+                let classChoice = prompt("Select class: 1 for First Class, 2 for Economy Class");
+
+                if (classChoice !== "1" && classChoice !== "2") {
+                    alert("Invalid choice. Please enter 1 for First Class or 2 for Economy Class.");
+                    return;
+                }
+
+                classChoice = parseInt(classChoice);
+
+                let availableSeats = [];
+                if (classChoice === 1) {
+                    for (let i = 0; i < 5; i++) {
+                        if (seats[i] === 0) availableSeats.push(i + 1);
+                    }
+                } else if (classChoice === 2) {
+                    for (let i = 5; i < 10; i++) {
+                        if (seats[i] === 0) availableSeats.push(i + 1); 
+                    }
+                }
+
+                if (availableSeats.length === 0) {
+                    alert("Sorry, there are no available seats in this class. Please try again later.");
+                    return;
+                }
+
+                let seatNumber = prompt(`Available seats in Class ${classChoice === 1 ? 'First' : 'Economy'}: ${availableSeats.join(", ")}. Please select a seat number:`);
+
+                seatNumber = parseInt(seatNumber);
+
+                if (availableSeats.includes(seatNumber)) {
+                    reserveSeat(classChoice, personName, seatNumber);
+                } else {
+                    alert("Invalid seat selection. Please try again.");
+                }
+            }
+
+            displaySeatingChart();
+
+            document.getElementById('reserveBtn').addEventListener('click', makeReservation);
+        </script>
+
+    </body>
+</html>
