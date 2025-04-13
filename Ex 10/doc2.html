@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .input-field {
+            margin: 10px;
+            padding: 5px;
+        }
+        .btn {
+            margin: 5px;
+            padding: 8px 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Original Title</h1>
+    <button class="btn" onclick="updateTitle()">Update Title (a)</button><br><br>
+
+    <label for="username">Username:</label>
+    <input type="text" name="username" class="input-field"><br>
+    <button class="btn" onclick="updateUsername()">Set Username (b)</button><br><br>
+
+    <label>Gender:</label>
+    <input type="radio" name="gender" value="Male"> Male
+    <input type="radio" name="gender" value="Female"> Female
+    <input type="radio" name="gender" value="Other"> Other
+    <button class="btn" onclick="checkGender()">Check Selected Gender (b)</button><br><br>
+    <div id="gender-result">Selected Gender: None</div><br>
+
+    <p class="info">Info paragraph 1</p>
+    <p class="info">Info paragraph 2</p>
+    <p>This is a normal paragraph.</p>
+    <button class="btn" onclick="countParagraphs()">Count Paragraphs (c)</button><br><br>
+
+    <ul>
+        <li>Item 1</li>
+        <li>Item 2</li>
+        <li>Item 3</li>
+    </ul>
+    <button class="btn" onclick="listItems()">Print List Items (c)</button><br><br>
+
+    <label>Hobbies:</label><br>
+    <input type="checkbox" class="hobby" value="Reading"> Reading
+    <input type="checkbox" class="hobby" value="Sports"> Sports
+    <input type="checkbox" class="hobby" value="Music"> Music
+    <button class="btn" onclick="checkHobbies()">Check Hobbies (f)</button><br><br>
+
+    <button class="btn" onclick="changeInputFieldColor()">Change Input Field Color (d)</button><br><br>
+
+    <button class="btn" onclick="updateFirstInfo()">Update First Info Paragraph (e)</button><br><br>
+
+    <button class="btn" onclick="selectFirstGender()">Select First Gender Radio (e)</button><br><br>
+
+    <button class="btn" onclick="printInfoParagraphs()">Print Info Paragraphs (f)</button><br><br>
+
+    <script>
+        function updateTitle() {
+            document.getElementById("title").textContent = "Updated Title";
+        }
+
+        function updateUsername() {
+            document.getElementsByName("username")[0].value = "John Doe";
+        }
+
+        function checkGender() {
+            const genderRadios = document.getElementsByName("gender");
+            let selectedGender = "None";
+            for (let radio of genderRadios) {
+                if (radio.checked) {
+                    selectedGender = radio.value;
+                    break;
+                }
+            }
+            document.getElementById("gender-result").textContent = "Selected Gender: " + selectedGender;
+        }
+
+        function countParagraphs() {
+            const paragraphs = document.getElementsByTagName("p");
+            console.log("Total <p> elements:", paragraphs.length);
+        }
+
+        function listItems() {
+            const listItems = document.getElementsByTagName("li");
+            console.log("List Items:");
+            for (let item of listItems) {
+                console.log(item.textContent);
+            }
+        }
+
+        function changeInputFieldColor() {
+            const inputFields = document.getElementsByClassName("input-field");
+            for (let field of inputFields) {
+                field.style.backgroundColor = "lightblue";
+            }
+        }
+
+        function updateFirstInfo() {
+            document.querySelector(".info").textContent = "This is the first info paragraph";
+        }
+
+        function selectFirstGender() {
+            const genderRadios = document.getElementsByName("gender");
+            if (genderRadios.length > 0) {
+                genderRadios[0].checked = true;
+            }
+        }
+
+        function printInfoParagraphs() {
+            const infoParagraphs = document.querySelectorAll(".info");
+            console.log("Info Paragraphs:");
+            infoParagraphs.forEach(p => console.log(p.textContent));
+        }
+
+        function checkHobbies() {
+            const checkboxes = document.querySelectorAll(".hobby");
+            console.log("Checked Hobbies:");
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = true;
+                console.log(checkbox.value);
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>23BCE1462</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 20px;
+        }
+        table {
+            width: 60%;
+            margin: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #008CBA;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Hospital Patient Data</h2>
+
+    <table id="patientTable">
+        <thead>
+            <tr>
+                <th>P-Id</th>
+                <th>Name</th>
+                <th>Age</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <br>
+
+    <button onclick="sortPatients()">Sort by Age (Descending)</button>
+
+    <br>
+
+    <input type="number" id="pidInput" placeholder="Enter P-Id to check">
+    <button onclick="checkPatient()">Check P-Id</button>
+    <p id="checkResult"></p>
+
+    <br>
+
+    <input type="number" id="minAge" placeholder="Min Age">
+    <input type="number" id="maxAge" placeholder="Max Age">
+    <button onclick="filterPatients()">Filter by Age</button>
+
+    <script>
+        const patients = [
+            { PId: 1, Name: "Alen", Age: 39 },
+            { PId: 2, Name: "Deena", Age: 47 },
+            { PId: 3, Name: "Diana", Age: 21 },
+            { PId: 4, Name: "Jack", Age: 54 },
+            { PId: 5, Name: "Jain", Age: 23 },
+            { PId: 6, Name: "Kelvin", Age: 61 },
+            { PId: 7, Name: "Louis", Age: 69 },
+            { PId: 8, Name: "Rex", Age: 49 }
+        ];
+
+        function displayPatients(data) {
+            const tableBody = document.querySelector("#patientTable tbody");
+            tableBody.innerHTML = "";
+
+            data.forEach(patient => {
+                const row = `<tr>
+                                <td>${patient.PId}</td>
+                                <td>${patient.Name}</td>
+                                <td>${patient.Age}</td>
+                            </tr>`;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function sortPatients() {
+            const sortedPatients = [...patients].sort((a, b) => b.Age - a.Age);
+            displayPatients(sortedPatients);
+        }
+
+        function checkPatient() {
+            const pid = parseInt(document.getElementById("pidInput").value);
+            const exists = patients.some(patient => patient.PId === pid);
+            document.getElementById("checkResult").textContent = exists 
+                ? `Patient with P-Id ${pid} is present.` 
+                : `Patient with P-Id ${pid} is NOT found.`;
+        }
+
+        function filterPatients() {
+            const minAge = parseInt(document.getElementById("minAge").value);
+            const maxAge = parseInt(document.getElementById("maxAge").value);
+
+            if (isNaN(minAge) || isNaN(maxAge)) {
+                alert("Please enter both min and max age.");
+                return;
+            }
+
+            const filtered = patients.filter(patient => patient.Age >= minAge && patient.Age <= maxAge);
+            displayPatients(filtered);
+        }
+
+        displayPatients(patients);
+    </script>
+
+</body>
+</html>
